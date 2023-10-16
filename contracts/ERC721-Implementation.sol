@@ -10,10 +10,11 @@ import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts/access/AccessControl.sol";
 
 // import "@openzeppelin/";
 
-contract soulBT is Initializable, OwnableUpgradeable, ERC721Upgradeable, ERC721URIStorageUpgradeable {
+contract soulBT is Initializable, OwnableUpgradeable, ERC721Upgradeable, ERC721URIStorageUpgradeable, AccessControl {
 
     // using Counters for Counters.Counter;
     string public baseURI;
@@ -47,5 +48,12 @@ contract soulBT is Initializable, OwnableUpgradeable, ERC721Upgradeable, ERC721U
 
     function tokensOfOwner(address owner) public view returns (uint256[] memory) {
         return _ownedTokens[owner];
+    }
+
+    function _burn(uint256 id) internal override(ERC721Upgradeable, ERC721URIStorageUpgradeable) {
+        super._burn(id);
+    }
+    function tokenURI(uint256 id) public view override(ERC721Upgradeable, ERC721URIStorageUpgradeable) returns (string memory) {
+        return super.tokenURI(id);
     }
 }

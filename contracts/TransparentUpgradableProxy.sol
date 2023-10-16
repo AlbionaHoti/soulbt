@@ -71,5 +71,11 @@ contract soulBTV2 is Initializable, ERC721Upgradeable, OwnableUpgradeable, ERC72
         super._beforeTokenTransfer(from, to, tokenIdd);  
     }
 
+    function _burn(uint256 id) internal override(ERC721Upgradeable, ERC721URIStorageUpgradeable) {
+        super._burn(id);
+    }
 
+    function tokenURI(uint256 id) public view override(ERC721Upgradeable, ERC721URIStorageUpgradeable) returns (string memory) {
+        return super.tokenURI(id);
+    }
 }
