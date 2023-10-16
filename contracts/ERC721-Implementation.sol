@@ -13,7 +13,7 @@ import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
 // import "@openzeppelin/";
 
-contract soulBT is Initializable, OwnableUpgradeable, ERC721Upgradeable, ERC721URIStorage {
+contract soulBT is Initializable, OwnableUpgradeable, ERC721Upgradeable, ERC721URIStorageUpgradeable {
 
     // using Counters for Counters.Counter;
     string public baseURI;
