@@ -42,6 +42,7 @@ contract soulBT is Initializable, OwnableUpgradeable, ERC721Upgradeable, ERC721U
         tokenId++;
     }
 
+    // added these two func based on error message and suggestions
     function setBaseURI(string memory _baseURI) public onlyOwner {
         baseURI = _baseURI;
     }
