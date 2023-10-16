@@ -36,9 +36,8 @@ contract soulBTV2 is Initializable, ERC721Upgradeable, OwnableUpgradeable, ERC72
     // }
 
     // Upgradable contract
-      function initialize() public initializer { 
-        __ERC721_init("soul BT NFT 2", "SKBTT");
-
+    function initialize() public initializer { 
+        __ERC721_init("soulBT", "SKBT");
     }
 
     // Function to mint a new NFT to a specified recipient; only the owner can call this
