@@ -25,7 +25,7 @@ contract soulBTV2 is Initializable, ERC721Upgradeable, OwnableUpgradeable, ERC72
     // at the expense of removing the ability to change the admin once it's set.
     // This is acceptable if the admin is always a ProxyAdmin instance or similar contract
     // with its own ability to transfer the permissions to another account.
-    // address private immutable _admin;
+    // address private immutable _admin;w
     // address private _implementation;
 
     // Counters.Counter private _tokenIds;
