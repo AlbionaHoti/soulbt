@@ -1,3 +1,5 @@
+import * as hre from "hardhat";
+
 import { HardhatRuntimeEnvironment, HttpNetworkConfig } from "hardhat/types";
 
 import { Deployer } from "@matterlabs/hardhat-zksync-deploy";
@@ -24,20 +26,25 @@ export default async function (hre: HardhatRuntimeEnvironment) {
     const baseNFT = "https://ipfs.io/ipfs/QmXJyiiJSvVgfzMTXHFkyGoeS31ipjkqJzx5dR5vowCKD1";
 
     // Deploying the ERC721 contract
-    const nftContractArtifact = await deployer.loadArtifact("soulBT");
-    const nftContract = await deployer.deploy(nftContractArtifact, []);
-    console.log(`NFT Contract address: ${nftContract.address}`);
+    // const nftContractArtifact = await deployer.loadArtifact("soulBT");
+    // const nftContract = await deployer.deploy(nftContractArtifact, []);
+
+    const soulBTV2 = await deployer.loadArtifact('soulBTV2');
+    await hre.zkUpgrades.upgradeProxy(deployer.zkWallet, "0xcE869ed0e2D6612502407588d9Aba838987a0213", soulBTV2);
+
+    
+    // console.log(`NFT Contract address: ${soulBTContract.address}`);
 
     const recipientAddress = wallet.address;
 
     // Mint NFTs to the recipient address
-    const tx = await nftContract.mintTo(recipientAddress, baseNFT);
+    // const tx = await soulBTContract.mintTo(recipientAddress, baseNFT);
     await tx.wait();
     console.log(`The NFT has been given to ${recipientAddress}`);
 
     // Get and log the balance of the recipient
-    const balance = await nftContract.balanceOf(recipientAddress);
-    console.log(`Balance of the recipient: ${balance}`);
+    // const balance = await soulBTContract.balanceOf(recipientAddress);
+    // console.log(`Balance of the recipient: ${balance}`);
     console.log(`Done!`);
 
 }

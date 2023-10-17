@@ -4,17 +4,16 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721URIStorageUpgradeable.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+// import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import "@openzeppelin/contracts/access/AccessControl.sol";
+// import "@openzeppelin/contracts/access/AccessControl.sol";
 
 // import "@openzeppelin/";
 
-contract soulBT is Initializable, OwnableUpgradeable, ERC721Upgradeable, ERC721URIStorageUpgradeable, AccessControl {
+contract soulBT is Initializable, OwnableUpgradeable, ERC721Upgradeable, ERC721URIStorageUpgradeable {
 
     // using Counters for Counters.Counter;
     string public baseURI;
@@ -28,9 +27,10 @@ contract soulBT is Initializable, OwnableUpgradeable, ERC721Upgradeable, ERC721U
     // Constructor to initialize the NFT's name, symbol, and baseTokenURI
     // constructor() ERC721("soulBT Surfer NFT", "SBT") {
     // }
-    function initialize(address initialOwner) public initializer {
+    function initialize() public initializer {
         __ERC721_init("soulBT", "SKBT");
-        // __Ownable_init(initialOwner);
+        __Ownable_init();
+        __ERC721URIStorage_init();
     }
 
 
@@ -56,5 +56,8 @@ contract soulBT is Initializable, OwnableUpgradeable, ERC721Upgradeable, ERC721U
     }
     function tokenURI(uint256 id) public view override(ERC721Upgradeable, ERC721URIStorageUpgradeable) returns (string memory) {
         return super.tokenURI(id);
+    }
+    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721Upgradeable, ERC721URIStorageUpgradeable) returns (bool) {
+        return super.supportsInterface(interfaceId);
     }
 }

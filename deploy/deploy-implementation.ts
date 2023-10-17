@@ -26,6 +26,8 @@ export default async function (hre: HardhatRuntimeEnvironment) {
     // Deploying the ERC721 contract
     const nftContractArtifact = await deployer.loadArtifact("soulBT");
     const nftContract = await deployer.deploy(nftContractArtifact, []);
+
+    await nftContract.initialize();
     console.log(`NFT Contract address: ${nftContract.address}`);
 
     const recipientAddress = wallet.address;

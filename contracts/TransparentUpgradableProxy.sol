@@ -36,8 +36,13 @@ contract soulBTV2 is Initializable, ERC721Upgradeable, OwnableUpgradeable, ERC72
     // }
 
     // Upgradable contract
-    function initialize() public initializer { 
+    // function initialize() public initializer { 
+    //     __ERC721_init("soulBT", "SKBT");
+    // }
+
+     function initialize() public initializer {
         __ERC721_init("soulBT", "SKBT");
+        __Ownable_init();
     }
 
     // Function to mint a new NFT to a specified recipient; only the owner can call this
@@ -64,10 +69,11 @@ contract soulBTV2 is Initializable, ERC721Upgradeable, OwnableUpgradeable, ERC72
     function _beforeTokenTransfer(
         address from, 
         address to, 
-        uint256 tokenIdd
+        uint256 tokenIdd,
+        uint256 batchSize
     ) internal override virtual {
         require(from == address(0), "Err: token transfer is BLOCKED");   
-        super._beforeTokenTransfer(from, to, tokenIdd);  
+        super._beforeTokenTransfer(from, to, tokenIdd, batchSize);
     }
 
     function _burn(uint256 id) internal override(ERC721Upgradeable, ERC721URIStorageUpgradeable) {
@@ -76,5 +82,8 @@ contract soulBTV2 is Initializable, ERC721Upgradeable, OwnableUpgradeable, ERC72
 
     function tokenURI(uint256 id) public view override(ERC721Upgradeable, ERC721URIStorageUpgradeable) returns (string memory) {
         return super.tokenURI(id);
+    }
+    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721Upgradeable, ERC721URIStorageUpgradeable) returns (bool) {
+        return super.supportsInterface(interfaceId);
     }
 }
