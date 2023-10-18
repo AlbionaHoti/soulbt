@@ -25,22 +25,25 @@ export default async function (hre: HardhatRuntimeEnvironment) {
 
     // Deploying the ERC721 contract
     const nftContractArtifact = await deployer.loadArtifact("soulBT");
-    const nftContract = await deployer.deploy(nftContractArtifact, []);
-
-    await nftContract.initialize();
-    console.log(`NFT Contract address: ${nftContract.address}`);
-
+    // const nftContract = await deployer.deploy(nftContractArtifact);
+    const nftProxy = await hre.zkUpgrades.deployProxy(deployer.zkWallet, nftContractArtifact);
+    // The deployProxy method deploys your implementation contract on zkSync Era, deploys the proxy admin contract, and finally, deploys the transparent proxy.
+    
+    console.log(`NFT Contract address: ${nftProxy.address}`);
     const recipientAddress = wallet.address;
 
     // Mint NFTs to the recipient address
-    const tx = await nftContract.mintTo(recipientAddress, baseNFT);
+    const tx = await nftProxy.mintTo(recipientAddress, baseNFT);
     await tx.wait();
     console.log(`The NFT has been given to ${recipientAddress}`);
 
     // Get and log the balance of the recipient
-    const balance = await nftContract.balanceOf(recipientAddress);
+    const balance = await nftProxy.balanceOf(recipientAddress);
     console.log(`Balance of the recipient: ${balance}`);
     console.log(`Done!`);
+
+    await nftProxy.deployed();
+    console.log("soulBT deployed to: ", nftProxy.address)
 
 }
 

@@ -41,8 +41,9 @@ contract soulBTV2 is Initializable, ERC721Upgradeable, OwnableUpgradeable, ERC72
     // }
 
      function initialize() public initializer {
-        __ERC721_init("soulBT", "SKBT");
+        __ERC721_init("soulBTV2", "SKBT2");
         __Ownable_init();
+        __ERC721URIStorage_init();
     }
 
     // Function to mint a new NFT to a specified recipient; only the owner can call this
@@ -52,14 +53,6 @@ contract soulBTV2 is Initializable, ERC721Upgradeable, OwnableUpgradeable, ERC72
         _setTokenURI(tokenId, uri);
         tokenId++;
     }
-
-    function setBaseURI(string memory _baseURI) public onlyOwner {
-        baseURI = _baseURI;
-    }
-
-    function tokensOfOwner(address owner) public view returns (uint256[] memory) {
-        return _ownedTokens[owner];
-    }    
 
     // the small snippet: in order for us to block the transfer of NFT and eventually making it "Soulbound."
     // Every time this code will run, the require statement will check: if the from address parameter in 
@@ -76,10 +69,18 @@ contract soulBTV2 is Initializable, ERC721Upgradeable, OwnableUpgradeable, ERC72
         super._beforeTokenTransfer(from, to, tokenIdd, batchSize);
     }
 
+    // added these two func based on error message and suggestions
+    function setBaseURI(string memory _baseURI) public onlyOwner {
+        baseURI = _baseURI;
+    }
+
+    function tokensOfOwner(address owner) public view returns (uint256[] memory) {
+        return _ownedTokens[owner];
+    }
+
     function _burn(uint256 id) internal override(ERC721Upgradeable, ERC721URIStorageUpgradeable) {
         super._burn(id);
     }
-
     function tokenURI(uint256 id) public view override(ERC721Upgradeable, ERC721URIStorageUpgradeable) returns (string memory) {
         return super.tokenURI(id);
     }

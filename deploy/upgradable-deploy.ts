@@ -25,12 +25,13 @@ export default async function (hre: HardhatRuntimeEnvironment) {
 
     const baseNFT = "https://ipfs.io/ipfs/QmXJyiiJSvVgfzMTXHFkyGoeS31ipjkqJzx5dR5vowCKD1";
 
+    const proxyAddress = "0xcEddA6D31b9A52bf204b251C99F9331f8170F48E";
     // Deploying the ERC721 contract
     // const nftContractArtifact = await deployer.loadArtifact("soulBT");
     // const nftContract = await deployer.deploy(nftContractArtifact, []);
 
     const soulBTV2 = await deployer.loadArtifact('soulBTV2');
-    await hre.zkUpgrades.upgradeProxy(deployer.zkWallet, "0xcE869ed0e2D6612502407588d9Aba838987a0213", soulBTV2);
+    await hre.zkUpgrades.upgradeProxy(deployer.zkWallet, proxyAddress, soulBTV2);
 
     
     // console.log(`NFT Contract address: ${soulBTContract.address}`);
