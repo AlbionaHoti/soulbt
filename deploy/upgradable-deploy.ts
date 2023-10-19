@@ -25,7 +25,7 @@ export default async function (hre: HardhatRuntimeEnvironment) {
 
     const baseNFT = "https://ipfs.io/ipfs/QmXJyiiJSvVgfzMTXHFkyGoeS31ipjkqJzx5dR5vowCKD1";
 
-    const proxyAddress = "0xcEddA6D31b9A52bf204b251C99F9331f8170F48E";
+    const proxyAddress = "0x15Ce81d764605AC5d931Baa33a15e69FADDAFF85";
     // Deploying the ERC721 contract
     // const nftContractArtifact = await deployer.loadArtifact("soulBT");
     // const nftContract = await deployer.deploy(nftContractArtifact, []);

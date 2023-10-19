@@ -20,6 +20,8 @@ contract soulBTV2 is Initializable, ERC721Upgradeable, OwnableUpgradeable, ERC72
     uint256 public tokenId;
     mapping (string => bool) public addressExists;
     mapping (address => uint256[]) private _ownedTokens;
+    uint256[49] private __gap;
+
 
     // An immutable address for the admin to avoid unnecessary SLOADs before each call
     // at the expense of removing the ability to change the admin once it's set.
@@ -40,33 +42,19 @@ contract soulBTV2 is Initializable, ERC721Upgradeable, OwnableUpgradeable, ERC72
     //     __ERC721_init("soulBT", "SKBT");
     // }
 
-     function initialize() public initializer {
-        __ERC721_init("soulBTV2", "SKBT2");
+    function initialize() public initializer {
+        __ERC721_init("soulBT", "SKBT");
         __Ownable_init();
         __ERC721URIStorage_init();
     }
-
+    
     // Function to mint a new NFT to a specified recipient; only the owner can call this
     function mintTo(address recipient, string memory uri) public onlyOwner {
         require(recipient != address(0), "recipient must not be the zero address");
         _safeMint(recipient, tokenId);
         _setTokenURI(tokenId, uri);
+        // tokenURI(tokenId);
         tokenId++;
-    }
-
-    // the small snippet: in order for us to block the transfer of NFT and eventually making it "Soulbound."
-    // Every time this code will run, the require statement will check: if the from address parameter in 
-    // the function is set to zero. If yes, it will allow the action to happen and block all the other 
-    // transfers to make it a non-transferable token.
-    // ℹ️ Note: When the address from == 0, it means the token is being issued or minted and not transferred.
-    function _beforeTokenTransfer(
-        address from, 
-        address to, 
-        uint256 tokenIdd,
-        uint256 batchSize
-    ) internal override virtual {
-        require(from == address(0), "Err: token transfer is BLOCKED");   
-        super._beforeTokenTransfer(from, to, tokenIdd, batchSize);
     }
 
     // added these two func based on error message and suggestions
@@ -86,5 +74,20 @@ contract soulBTV2 is Initializable, ERC721Upgradeable, OwnableUpgradeable, ERC72
     }
     function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721Upgradeable, ERC721URIStorageUpgradeable) returns (bool) {
         return super.supportsInterface(interfaceId);
+    }
+
+    // the small snippet: in order for us to block the transfer of NFT and eventually making it "Soulbound."
+    // Every time this code will run, the require statement will check: if the from address parameter in 
+    // the function is set to zero. If yes, it will allow the action to happen and block all the other 
+    // transfers to make it a non-transferable token.
+    // ℹ️ Note: When the address from == 0, it means the token is being issued or minted and not transferred.
+    function _beforeTokenTransfer(
+        address from, 
+        address to, 
+        uint256 tokenIdd,
+        uint256 batchSize
+    ) internal override virtual {
+        require(from == address(0), "Err: token transfer is BLOCKED");   
+        super._beforeTokenTransfer(from, to, tokenIdd, batchSize);
     }
 }

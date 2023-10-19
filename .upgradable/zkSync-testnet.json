@@ -1,20 +1,20 @@
 {
   "manifestVersion": "3.2",
   "admin": {
-    "address": "0xA4e36a2B2047A5C1D5e352Fab1514AD2A3092Cc5",
-    "txHash": "0x78e222b5999e68342723b76abae51925e080c4df18e569aedcf8370f8ab2f25a"
+    "address": "0x353E653df2F6c18C6864E78A56075a81b755B30C",
+    "txHash": "0xc0f603956713ca1011cadbc37fa718e9fb32cb1fa1dd26b48d8a7c466a34f440"
   },
   "proxies": [
     {
-      "address": "0xcEddA6D31b9A52bf204b251C99F9331f8170F48E",
-      "txHash": "0x3f1e8d51faea5eed6f800ac38650735f48e48ec30f42a6ed74de82c19e4b7779",
+      "address": "0x15Ce81d764605AC5d931Baa33a15e69FADDAFF85",
+      "txHash": "0xcea284a7e31373738769c8febfda4022ffeef50b7c1260f71c693a740f7f7e0e",
       "kind": "transparent"
     }
   ],
   "impls": {
-    "040f4f2f4cc63695a52086a88c2bb91da914cd70aa23fdbffb10d68d01de5bd5": {
-      "address": "0x6914Caa6b5ABa411aA0cA5159a6cB634441D9C2F",
-      "txHash": "0x19def7e3d20b8dff8b42b8ab580a4d6cc73b2384b25adacd05525d55d079eef8",
+    "559b7337cd39888782dd14760549fc3b96fb7fc4b87b3481164b33a379beadb5": {
+      "address": "0x899524Cd3466044866B930302a19143E58eD56c1",
+      "txHash": "0xefb7c9efd22c9e8c357e9f87b909b597a7c4ad595a9a04df6b135bfecc086d36",
       "layout": {
         "solcVersion": "0.8.17",
         "storage": [
@@ -172,12 +172,20 @@
             "src": "contracts/ERC721-Implementation.sol:22"
           },
           {
-            "label": "_baseTokenURI",
+            "label": "__gap",
             "offset": 0,
             "slot": "255",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "soulBT",
+            "src": "contracts/ERC721-Implementation.sol:23"
+          },
+          {
+            "label": "_baseTokenURI",
+            "offset": 0,
+            "slot": "304",
             "type": "t_string_storage",
             "contract": "soulBT",
-            "src": "contracts/ERC721-Implementation.sol:25"
+            "src": "contracts/ERC721-Implementation.sol:27"
           }
         ],
         "types": {

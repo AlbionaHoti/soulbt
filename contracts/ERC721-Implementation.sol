@@ -20,6 +20,8 @@ contract soulBT is Initializable, OwnableUpgradeable, ERC721Upgradeable, ERC721U
     uint256 public tokenId;
     mapping (string => bool) public addressExists;
     mapping (address => uint256[]) private _ownedTokens;
+    uint256[49] private __gap;
+
 
     // Counters.Counter private _tokenIds;
     string private _baseTokenURI;
