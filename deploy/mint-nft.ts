@@ -18,7 +18,7 @@ const PRIVATE_KEY = process.env.WALLET_PRIVATE_KEY || "";
 // const NFT_COLLECTION_ADDRESS = "0x63f9283B1CD122ff451Aa632B6C2A29d6f98b977"
 
 //-> mainnet that worked for everyone
-const NFT_COLLECTION_ADDRESS = "0x80249597eb26dC6729dF3C1D091BAC734A5beFD3" 
+const NFT_COLLECTION_ADDRESS = "0xE482ACc8Dc5e177C5dFc94b4b1be29881fd3bf03"  // soulBTV2
 
 // const NFT_COLLECTION_ADDRESS = "0xb882E331c756Fa73ba28ba818AaBA0791E72B832"
 
@@ -45,7 +45,7 @@ export default async function (hre: HardhatRuntimeEnvironment) {
     // Create deployer object and load the artifact of the contract you want to deploy.
     const deployer = new Deployer(hre, wallet);
 
-    const surferNFTContractArtifact = await deployer.loadArtifact("soulBT");
+    const surferNFTContractArtifact = await deployer.loadArtifact("soulBTV2");
 
     const nftContract = new zk.Contract(NFT_COLLECTION_ADDRESS, surferNFTContractArtifact.abi, wallet.connect(provider));
     
@@ -56,7 +56,7 @@ export default async function (hre: HardhatRuntimeEnvironment) {
     let balance = await nftContract.balanceOf(wallet.address);
     console.log(`NFT Balance is ${balance}`);
 
-    assert(balance == 1);
+    assert(balance == 3);
 
     // Reading the recipients addresses to mint NFTs to
     const recipientData = fs.readFileSync(path.join(__dirname, 'recipients.json'), 'utf-8');

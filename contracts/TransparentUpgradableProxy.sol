@@ -13,7 +13,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
 
-contract soulBTV2 is Initializable, ERC721Upgradeable, OwnableUpgradeable, ERC721URIStorageUpgradeable {
+contract soulBTV2 is Initializable, OwnableUpgradeable, ERC721Upgradeable, ERC721URIStorageUpgradeable {
 
     // using Counters for Counters.Counter;
     string public baseURI;
@@ -43,7 +43,7 @@ contract soulBTV2 is Initializable, ERC721Upgradeable, OwnableUpgradeable, ERC72
     // }
 
     function initialize() public initializer {
-        __ERC721_init("soulBT", "SKBT");
+        __ERC721_init("soulBTV2", "SKBTV2");
         __Ownable_init();
         __ERC721URIStorage_init();
     }
@@ -53,7 +53,6 @@ contract soulBTV2 is Initializable, ERC721Upgradeable, OwnableUpgradeable, ERC72
         require(recipient != address(0), "recipient must not be the zero address");
         _safeMint(recipient, tokenId);
         _setTokenURI(tokenId, uri);
-        // tokenURI(tokenId);
         tokenId++;
     }
 
